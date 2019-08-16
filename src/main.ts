@@ -9,14 +9,16 @@ import fs from 'fs';
 
 async function run() {
   try {
-    fs.readdir(process.cwd(), (err, files) => {
+    var cwd = path.resolve(__dirname, '..')
+
+    fs.readdir(cwd, (err, files) => {
       core.warning('' + err);
       files.forEach(file => {
         core.warning(file);
       });
     });
 
-    core.warning(`${process.cwd()}`);
+    core.warning(`${__dirname}`);
 
     const myInput = core.getInput('myInput');
     core.warning(`Hello ${myInput}`);
@@ -33,7 +35,7 @@ async function run() {
           myError += data.toString();
         }
       },
-      // cwd: path.resolve(process.cwd(), 'src'),
+      cwd: cwd,
     };
 
     await exec.exec(`${await io.which('bash', true)}`, ['src/push.sh', 'dist'], options);
