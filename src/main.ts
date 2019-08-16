@@ -3,13 +3,24 @@ import * as exec from '@actions/exec';
 import * as io from '@actions/io';
 import path from 'path';
 
+import fs from 'fs';
+
+
+
 async function run() {
   try {
+    fs.readdir(process.cwd(), (err, files) => {
+      core.warning('' + err);
+      files.forEach(file => {
+        core.warning(file);
+      });
+    });
+
     core.warning(`${process.cwd()}`);
 
     const myInput = core.getInput('myInput');
     core.warning(`Hello ${myInput}`);
-    
+
     var myOutput = '';
     var myError = '';
 
@@ -22,11 +33,11 @@ async function run() {
           myError += data.toString();
         }
       },
-      cwd: path.resolve(process.cwd(), 'src'),
+      // cwd: path.resolve(process.cwd(), 'src'),
     };
 
-    await exec.exec(`${await io.which('bash', true)}`, ['./push.sh', 'dist'], options);
-    
+    await exec.exec(`${await io.which('bash', true)}`, ['src/push.sh', 'dist'], options);
+
     core.warning(`${myOutput}`);
     core.error(`${myError}`);
   } catch (error) {
