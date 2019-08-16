@@ -1,9 +1,12 @@
 import * as core from '@actions/core';
 import * as exec from '@actions/exec';
 import * as io from '@actions/io';
+import path from 'path';
 
 async function run() {
   try {
+    core.warning(`${process.cwd()}`);
+
     const myInput = core.getInput('myInput');
     core.warning(`Hello ${myInput}`);
     
@@ -19,7 +22,7 @@ async function run() {
           myError += data.toString();
         }
       },
-      cwd: './src',
+      cwd: path.resolve(process.cwd(), 'src'),
     };
 
     await exec.exec(`${await io.which('bash', true)}`, ['./push.sh', 'dist'], options);
