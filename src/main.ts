@@ -1,5 +1,6 @@
 import * as core from '@actions/core';
 import * as exec from '@actions/exec';
+import * as io from '@actions/io';
 
 async function run() {
   try {
@@ -21,7 +22,7 @@ async function run() {
       cwd: './src',
     };
 
-    await exec.exec('bash', ['./push.sh', 'dist'], options);
+    await exec.exec(`${await io.which('bash', true)}`, ['./push.sh', 'dist'], options);
     
     core.warning(`${myOutput}`);
     core.error(`${myError}`);
