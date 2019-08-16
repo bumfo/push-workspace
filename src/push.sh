@@ -1,5 +1,8 @@
 #!/bin/sh
 
+echo Hello World
+exit 1
+
 REF=$1
 if [ -z $1 ]; then
     REF='dist'
