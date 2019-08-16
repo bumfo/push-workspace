@@ -9,16 +9,17 @@ async function run() {
     var myOutput = '';
     var myError = '';
 
-    const options = {};
-    options.listeners = {
-      stdout: (data: Buffer) => {
-        myOutput += data.toString();
+    const options = {
+      listeners: {
+        stdout: (data: Buffer) => {
+          myOutput += data.toString();
+        },
+        stderr: (data: Buffer) => {
+          myError += data.toString();
+        }
       },
-      stderr: (data: Buffer) => {
-        myError += data.toString();
-      }
+      cwd: './src',
     };
-    options.cwd = './src';
 
     await exec.exec('./push.sh', ['dist'], options);
     
