@@ -18,10 +18,10 @@ async function run() {
           myError += data.toString();
         }
       },
-      cwd: '../src',
+      cwd: './src',
     };
 
-    await exec.exec('./push.sh', ['dist'], options);
+    await exec.exec('bash', ['./push.sh', 'dist'], options);
     
     core.warning(`${myOutput}`);
     core.error(`${myError}`);
