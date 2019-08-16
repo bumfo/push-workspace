@@ -18,7 +18,7 @@ async function run() {
           myError += data.toString();
         }
       },
-      cwd: './src',
+      cwd: '../src',
     };
 
     await exec.exec('./push.sh', ['dist'], options);
