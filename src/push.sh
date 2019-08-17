@@ -18,11 +18,10 @@ git config user.name "${GITHUB_ACTOR}"
 git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 git add .
 
-if [ ! git commit -am "Pushed From Action ${GITHUB_ACTION}" ]; then
+if git commit -am "Pushed From Action ${GITHUB_ACTION}"; then
+    git push ${REMOTE_REPO} HEAD:$REF
+    exit $?
+else
     echo Nothing to push
     exit 0
 fi
-
-git push ${REMOTE_REPO} HEAD:$REF
-
-exit $?
