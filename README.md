@@ -1,9 +1,14 @@
-# JavaScript Action Template
+# Push workspace
 
-This template offers an easy way to get started writing a javascript action with TypeScript compile time support, unit testing with Jest and using the GitHub Actions Toolkit.
+Push workspace back to Github
 
-## Getting Started
-
-See the walkthrough located [here](https://github.com/actions/toolkit/blob/master/docs/javascript-action.md).
-
-In addition to walking your through how to create an action, it also provides strategies for versioning, releasing and referencing your actions.
+Usage: 
+```yml
+jobs:
+  build:
+    - uses: bumfo/push-workspace@v1-release
+      with:
+        ref: 'refs/heads/dist'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
