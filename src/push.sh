@@ -17,7 +17,12 @@ cd "${GITHUB_WORKSPACE}" || exit 1
 git config user.name "${GITHUB_ACTOR}"
 git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 git add .
-git commit -am "Pushed From Action ${GITHUB_ACTION}" && git push ${REMOTE_REPO} HEAD:$REF
-# exit $?
 
-exit 1
+if [ ! git commit -am "Pushed From Action ${GITHUB_ACTION}" ]; then
+    echo Nothing to push
+    exit 0
+fi
+
+git push ${REMOTE_REPO} HEAD:$REF
+
+exit $?
