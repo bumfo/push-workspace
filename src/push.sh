@@ -6,6 +6,11 @@ if [ -z $1 ]; then
     exit 1
 fi
 
+if [ -z $GITHUB_TOKEN ]; then
+    echo Token invalid
+    exit 1
+fi
+
 REMOTE_REPO="https://${GITHUB_TOKEN}:x-oauth-basic@github.com/${GITHUB_REPOSITORY}.git"
 
 cd "${GITHUB_WORKSPACE}" || exit 1
