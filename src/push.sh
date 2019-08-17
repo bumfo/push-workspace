@@ -6,7 +6,7 @@ if [ -z $1 ]; then
     exit 1
 fi
 
-REMOTE_REPO="https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+REMOTE_REPO="https://${GITHUB_TOKEN}:x-oauth-basic@github.com/${GITHUB_REPOSITORY}.git"
 
 cd "${GITHUB_WORKSPACE}" || exit 1
 git config user.name "${GITHUB_ACTOR}"
